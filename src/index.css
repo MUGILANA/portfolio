@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Luxury Black + Gold + White Theme */
+    --background: 0 0% 5%;
+    --foreground: 45 30% 95%;
+
+    --card: 0 0% 8%;
+    --card-foreground: 45 30% 95%;
+
+    --popover: 0 0% 8%;
+    --popover-foreground: 45 30% 95%;
+
+    --primary: 45 80% 55%;
+    --primary-foreground: 0 0% 5%;
+
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 45 30% 95%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
+
+    --accent: 45 80% 55%;
+    --accent-foreground: 0 0% 5%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 45 30% 20%;
+    --input: 0 0% 15%;
+    --ring: 45 80% 55%;
+
+    --radius: 0.75rem;
+
+    /* Custom luxury colors */
+    --gold: 45 80% 55%;
+    --gold-light: 45 70% 70%;
+    --gold-dark: 45 90% 40%;
+    --luxury-black: 0 0% 5%;
+    --luxury-gray: 0 0% 12%;
+    --glass: 0 0% 100% / 0.05;
+    --glass-border: 45 30% 30% / 0.3;
+
+    /* Gradients */
+    --gradient-gold: linear-gradient(135deg, hsl(45, 80%, 55%), hsl(35, 90%, 45%));
+    --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
+    --gradient-hero: radial-gradient(ellipse at 50% 50%, rgba(212,175,55,0.15) 0%, transparent 60%);
+
+    /* Shadows */
+    --shadow-gold: 0 0 40px hsla(45, 80%, 55%, 0.3);
+    --shadow-card: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    --shadow-glow: 0 0 60px hsla(45, 80%, 55%, 0.2);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-poppins antialiased;
+    background-image: 
+      radial-gradient(ellipse at 20% 20%, hsla(45, 80%, 55%, 0.03) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, hsla(45, 80%, 55%, 0.02) 0%, transparent 50%);
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.3);
+    color: hsl(var(--foreground));
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-secondary/50 backdrop-blur-xl border border-primary/10 rounded-xl;
+    box-shadow: var(--shadow-card);
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-500;
+  }
+
+  .glass-card-hover:hover {
+    @apply border-primary/30;
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-5px);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-gold);
+  }
+
+  .btn-primary {
+    @apply px-8 py-4 rounded-full font-semibold text-sm tracking-wide uppercase transition-all duration-300;
+    background: var(--gradient-gold);
+    color: hsl(var(--luxury-black));
+    box-shadow: 0 10px 30px -10px hsla(45, 80%, 55%, 0.5);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px -10px hsla(45, 80%, 55%, 0.6);
+  }
+
+  .btn-outline {
+    @apply px-8 py-4 rounded-full font-semibold text-sm tracking-wide uppercase transition-all duration-300 border-2 border-primary/50 text-primary;
+    background: transparent;
+  }
+
+  .btn-outline:hover {
+    @apply bg-primary text-primary-foreground;
+    transform: translateY(-3px);
+  }
+
+  .section-title {
+    @apply text-4xl md:text-5xl font-bold font-montserrat mb-4;
+  }
+
+  .section-subtitle {
+    @apply text-muted-foreground text-lg max-w-2xl mx-auto;
+  }
+
+  .gold-glow {
+    box-shadow: var(--shadow-gold);
+  }
+
+  .floating {
+    animation: floating 3s ease-in-out infinite;
+  }
+
+  .floating-delayed {
+    animation: floating 3s ease-in-out infinite;
+    animation-delay: 1.5s;
+  }
+}
+
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+}
+
+@keyframes floating {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-gold {
+  0%, 100% {
+    box-shadow: 0 0 20px hsla(45, 80%, 55%, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 40px hsla(45, 80%, 55%, 0.6);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-pulse-gold {
+  animation: pulse-gold 2s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
